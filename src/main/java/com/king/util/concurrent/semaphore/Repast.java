@@ -1,10 +1,10 @@
-package com.king.util.concurrent.semaphore.service;
+package com.king.util.concurrent.semaphore;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class RepastService {
+public class Repast {
 
     volatile private Semaphore setSemaphore = new Semaphore(10);
     volatile private Semaphore getSemaphore = new Semaphore(20);
@@ -12,6 +12,18 @@ public class RepastService {
     volatile private Condition setCondition = lock.newCondition();
     volatile private Condition getCondition = lock.newCondition();
     volatile private Object[] producePosition = new Object[4];
+
+    public static void main(String[] args) {
+        Repast service = new Repast();
+        for (int i = 0; i < 60; i++) {
+            new Thread(service::get).start();
+        }
+
+        for (int i = 0; i < 60; i++) {
+            new Thread(service::set).start();
+        }
+
+    }
 
     private boolean isEmpty() {
         boolean isEmpty = true;
@@ -84,5 +96,4 @@ public class RepastService {
             getSemaphore.release();
         }
     }
-
 }
