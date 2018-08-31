@@ -17,14 +17,14 @@ public class TestObjSerializeAndDeserialize {
         person.setAge(25);
         person.setSex("男");
         // ObjectOutputStream 对象输出流，将Person对象存储到E盘的Person.txt文件中，完成对Person对象的序列化操作
-        ObjectOutputStream oo = new ObjectOutputStream(new FileOutputStream(new File("E:/Person.txt")));
+        ObjectOutputStream oo = new ObjectOutputStream(new FileOutputStream(new File("/Users/arowana/Desktop/Person.txt")));
         oo.writeObject(person);
         System.out.println("Person对象序列化成功！");
         oo.close();
     }
 
     private static Person DeserializePerson() throws Exception {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("E:/Person.txt")));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("/Users/arowana/Desktop/Person.txt")));
         Person person = (Person) ois.readObject();
         System.out.println("Person对象反序列化成功！");
         return person;
