@@ -1,4 +1,4 @@
-package com.king.util.concurrent.Atomic;
+package com.king.util.concurrent.atomic;
 
 import java.util.concurrent.atomic.AtomicLong;
 
